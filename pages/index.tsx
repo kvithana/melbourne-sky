@@ -120,8 +120,7 @@ export default function Home() {
 
         <footer
           className={
-            'flex absolute bottom-0 w-screen justify-end p-2' +
-            ` ${data?.isDark ? 'text-purple-100' : 'text-blue-900'} `
+            'flex fixed bottom-0 w-screen justify-end p-2' + ` ${data?.isDark ? 'text-purple-100' : 'text-blue-900'} `
           }
         >
           <div className="flex">
