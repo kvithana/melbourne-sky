@@ -4,7 +4,7 @@ A little experiment to show the colour of the Melbourne sky. Inspired by a websi
 
 There's not much to this. There's a single API endpoint which will pull the image, get the colours, and respond the sky colour and closest Pantone color info. This endpoint has a cache header for 60 seconds to make subsequent calls in the same minute super fast.
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and runs on Vercel.
 
 ## Getting Started
 
