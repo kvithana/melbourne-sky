@@ -10,6 +10,7 @@ function fetcher<T>() {
 interface APIData {
   name: { name: string; hex: string; distance: number }
   color: string
+  isDark: boolean
 }
 
 export default function Home() {
@@ -24,7 +25,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <main className={styles.main + ` ${data?.isDark ? 'text-purple-200' : 'text-blue-900'} `}>
         <h1 className={styles.title}>The Melbourne sky is {data ? data.name.name : 'White'}.</h1>
 
         {/* <p className={styles.description}>
@@ -32,7 +33,7 @@ export default function Home() {
         </p> */}
       </main>
 
-      <footer className={styles.footer}>
+      <footer className={styles.footer + ` ${data?.isDark ? 'text-purple-200' : 'text-blue-900'} `}>
         <a href="https://twitter.com/_kalpal" target="_blank" rel="noopener noreferrer">
           <span>
             Built by <strong>@_kalpal</strong>🌅
