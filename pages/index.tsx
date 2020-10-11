@@ -80,7 +80,7 @@ const AboutModal = ({ visible, toggleVisible }: { visible: boolean; toggleVisibl
 
 export default function Home() {
   const { data } = useSWR('/api/color', fetcher<APIData>(), { refreshInterval: 30e3 })
-  const [modalVisible, setModalVisible] = useState(true)
+  const [modalVisible, setModalVisible] = useState(false)
 
   return (
     <div className="w-screen h-screen" style={{ backgroundColor: data ? data.color : 'white' }}>
