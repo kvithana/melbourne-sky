@@ -18,12 +18,14 @@ export default function Home() {
   return (
     <div className={styles.container} style={{ backgroundColor: data ? data.color : 'white' }}>
       <Head>
-        <title>Create Next App</title>
+        <title>The Melbourne Sky</title>
+        <meta name="description" content="Ever just wonder what colour the sky in Melbourne is?" />
+
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>The Melbourne sky is {data ? data.name.name : 'white'}.</h1>
+        <h1 className={styles.title}>The Melbourne sky is {data ? data.name.name : 'White'}.</h1>
 
         {/* <p className={styles.description}>
           Get started by editing <code className={styles.code}>pages/index.js</code>
