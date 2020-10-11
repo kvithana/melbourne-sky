@@ -5,15 +5,15 @@ import Color from 'color'
 import namer from 'color-namer'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate')
+  res.setHeader('Cache-Control', 's-maxage=60')
   try {
     const fac = new FastAverageColor()
-    const img = await loadImage('https://www.somersyc.com.au/webcams/webcam1.jpg')
+    const img = await loadImage('https://www.somersyc.com.au/webcams/webcam2.jpg')
     const { width, height } = img
     const canvas = createCanvas(width, height)
     const ctx = canvas.getContext('2d')
     ctx.drawImage(img, 0, 0)
-    const imageData = ctx.getImageData(0, 0, width, height / 3)
+    const imageData = ctx.getImageData(0, 0, width, height / 4)
 
     // get colour
     const colourData = await fac.getColorFromArray4((imageData.data as unknown) as Uint8Array, {
