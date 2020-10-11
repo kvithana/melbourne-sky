@@ -3,12 +3,20 @@ import FastAverageColor from 'fast-average-color'
 import { createCanvas, loadImage } from 'canvas'
 import Color from 'color'
 import namer from 'color-namer'
+import { utcToZonedTime } from 'date-fns-tz'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.setHeader('Cache-Control', 's-maxage=60')
   try {
     const fac = new FastAverageColor()
-    const img = await loadImage('https://www.somersyc.com.au/webcams/webcam2.jpg')
+    const zonedDate = utcToZonedTime(new Date(), 'Australia/Melbourne')
+    let camURL: string
+    if (zonedDate.getHours() < 16) {
+      camURL = 'https://www.somersyc.com.au/webcams/webcam2.jpg'
+    } else {
+      camURL = 'https://www.somersyc.com.au/webcams/webcam1.jpg'
+    }
+    const img = await loadImage(camURL)
     const { width, height } = img
     const canvas = createCanvas(width, height)
     const ctx = canvas.getContext('2d')
