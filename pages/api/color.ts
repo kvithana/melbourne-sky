@@ -11,7 +11,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const fac = new FastAverageColor()
     const zonedDate = utcToZonedTime(new Date(), 'Australia/Melbourne')
     let camURL: string
-    if (zonedDate.getHours() < 16) {
+    if (zonedDate.getHours() < 10) {
       camURL = 'https://www.somersyc.com.au/webcams/webcam2.jpg'
     } else {
       camURL = 'https://www.somersyc.com.au/webcams/webcam1.jpg'
