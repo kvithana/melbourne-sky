@@ -124,7 +124,10 @@ export default function Home() {
           }
         >
           <div className="flex">
-            <button onClick={() => setModalVisible(true)} className="border-b">
+            <button
+              onClick={() => setModalVisible(true)}
+              className={'border-b' + ` ${data?.isDark ? 'border-purple-100' : 'border-blue-900'} `}
+            >
               About
             </button>
             <span className="px-2">•</span>
