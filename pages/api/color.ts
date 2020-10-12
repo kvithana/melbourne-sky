@@ -49,8 +49,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       name: namer(c.hex()).pantone[0],
       isDark: c.isDark(),
       times: {
-        isNight: new Date(times.dusk) < zonedDate || new Date(times.dawn) > zonedDate,
-        isGoldenHour: new Date(times.goldenHour) < zonedDate && new Date(times.goldenHourEnd) > zonedDate,
+        isNight:
+          utcToZonedTime(new Date(times.dusk), 'Australia/Melbourne') < zonedDate ||
+          utcToZonedTime(new Date(times.dawn), 'Australia/Melbourne') > zonedDate,
+        isGoldenHour:
+          utcToZonedTime(new Date(times.goldenHour), 'Australia/Melbourne') < zonedDate &&
+          utcToZonedTime(new Date(times.goldenHourEnd), 'Australia/Melbourne') > zonedDate,
         dawn: times.dawn,
         dusk: times.dusk,
         goldenHour: times.goldenHour,
