@@ -4,6 +4,7 @@ import { createCanvas, ImageData, loadImage } from 'canvas'
 import Color from 'color'
 import namer from 'color-namer'
 import { utcToZonedTime } from 'date-fns-tz'
+import SunCalc from 'suncalc'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.setHeader('Cache-Control', 's-maxage=60')
@@ -39,7 +40,23 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     // saturate
     const c = new Color(colourData).saturate(0.5)
 
-    res.json({ color: c.hex(), name: namer(c.hex()).pantone[0], isDark: c.isDark() })
+    // suncalc
+
+    const times = SunCalc.getTimes(zonedDate, -37.840935, 144.946457)
+
+    res.json({
+      color: c.hex(),
+      name: namer(c.hex()).pantone[0],
+      isDark: c.isDark(),
+      times: {
+        isNight: new Date(times.dusk) < zonedDate || new Date(times.dawn) > zonedDate,
+        isGoldenHour: new Date(times.goldenHour) < zonedDate && new Date(times.goldenHourEnd) > zonedDate,
+        dawn: times.dawn,
+        dusk: times.dusk,
+        goldenHour: times.goldenHour,
+        goldenHourEnd: times.goldenHourEnd,
+      },
+    })
   } catch (e) {
     res.statusCode = 500
     res.json({ error: JSON.stringify(e) })
