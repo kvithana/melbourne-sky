@@ -86,7 +86,7 @@ export default function Home() {
     <div className="w-screen h-screen" style={{ backgroundColor: data ? data.color : 'white' }}>
       <div
         className="flex flex-col w-full h-full justify-center items-center transition-colors"
-        style={{ backgroundColor: data ? data.color : 'white', transitionDuration: '5s' }}
+        style={{ backgroundColor: data ? data.color : 'unset', transitionDuration: '5s' }}
       >
         <Head>
           <title>The Melbourne Sky</title>
