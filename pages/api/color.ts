@@ -27,7 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const colourData = await fac.getColorFromArray4((imageData.data as unknown) as Uint8Array, {
       algorithm: 'sqrt',
     })
-    const c = new Color(colourData)
+    const c = new Color(colourData).saturate(0.5)
     res.json({ color: c.hex(), name: namer(c.hex()).pantone[0], isDark: c.isDark() })
   } catch (e) {
     res.statusCode = 500
