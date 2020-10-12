@@ -21,11 +21,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const canvas = createCanvas(width, height)
     const ctx = canvas.getContext('2d')
     ctx.drawImage(img, 0, 0)
-    const imageData = ctx.getImageData(0, 0, width, height / 4)
+    let imageData
+    if ((camURL = 'https://www.somersyc.com.au/webcams/webcam1.jpg')) {
+      imageData = ctx.getImageData(0, 200, width - 200, 100)
+    } else {
+      imageData = ctx.getImageData(0, 0, width, 200)
+    }
 
     // get colour
     const colourData = await fac.getColorFromArray4((imageData.data as unknown) as Uint8Array, {
-      algorithm: 'sqrt',
+      algorithm: 'simple',
     })
     const c = new Color(colourData).saturate(0.5)
     res.json({ color: c.hex(), name: namer(c.hex()).pantone[0], isDark: c.isDark() })
