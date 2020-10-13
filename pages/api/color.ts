@@ -42,7 +42,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     // suncalc
 
-    const times = SunCalc.getTimes(zonedDate, -37.840935, 144.946457)
+    const times = SunCalc.getTimes(new Date(), -37.840935, 144.946457)
 
     res.json({
       color: c.hex(),
@@ -54,7 +54,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           utcToZonedTime(new Date(times.dawn), 'Australia/Melbourne') > zonedDate,
         isGoldenHour:
           utcToZonedTime(new Date(times.goldenHour), 'Australia/Melbourne') < zonedDate &&
-          utcToZonedTime(new Date(times.goldenHourEnd), 'Australia/Melbourne') > zonedDate,
+          utcToZonedTime(new Date(times.sunset), 'Australia/Melbourne') > zonedDate,
         dawn: times.dawn,
         dusk: times.dusk,
         goldenHour: times.goldenHour,
