@@ -1,0 +1,33 @@
+{
+  "extends": ["config:base"],
+  "dependencyDashboard": true,
+  "prHourlyLimit": 8,
+  "prConcurrentLimit": 0,
+  "packageRules": [
+    {
+      "schedule": ["before 8am every wednesday", "every weekend"],
+      "updateTypes": ["major"],
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["*"],
+      "excludePackageNames": ["babel-loader", "styled-jsx", "puppeteer", "jest", "typescript", "date-fns"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch",
+      "schedule": ["before 8am every wednesday", "every weekend"],
+      "automerge": true
+    },
+    {
+      "matchPackageNames": ["babel-loader", "styled-jsx", "puppeteer", "jest", "typescript", "date-fns"],
+      "schedule": ["before 8am every wednesday", "every weekend"],
+      "updateTypes": ["minor", "patch"],
+      "automerge": false
+    },
+    {
+      "updateTypes": ["pin"],
+      "automerge": true
+    }
+  ],
+  "timezone": "Australia/Melbourne"
+}
