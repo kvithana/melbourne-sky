@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+/* eslint-disable react/prop-types */
+import { format } from 'date-fns-tz'
+import { NextPage } from 'next'
 import Head from 'next/head'
+import React, { useState } from 'react'
 import useSWR from 'swr'
 import useDelayedRender from 'use-delayed-render'
-import { format } from 'date-fns-tz'
 
 function fetcher<T>() {
   return (url: string) => fetch(url).then((r) => r.json() as Promise<T>)
@@ -96,8 +98,15 @@ const AboutModal = ({ visible, toggleVisible }: { visible: boolean; toggleVisibl
   )
 }
 
-export default function Home() {
-  const { data } = useSWR('/api/color', fetcher<APIData>(), { refreshInterval: 30e3 })
+type Propps = {
+  data: APIData
+}
+
+// eslint-disable-next-line react/prop-types
+const Home: NextPage<Propps> = ({ data: initData }) => {
+  const { data: refreshedData } = useSWR('/api/color', fetcher<APIData>(), { refreshInterval: 30e3 })
+  const data = refreshedData || initData
+
   const [modalVisible, setModalVisible] = useState(false)
 
   return (
@@ -166,3 +175,10 @@ export default function Home() {
     </div>
   )
 }
+
+Home.getInitialProps = async () => {
+  const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/color').then((res) => res.json())
+  return { data }
+}
+
+export default Home
