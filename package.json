@@ -14,7 +14,7 @@
     "color-namer": "^1.4.0",
     "date-fns-tz": "^1.0.12",
     "fast-average-color": "^6.1.0",
-    "next": "9.5.4",
+    "next": "9.5.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "sass": "^1.26.11",
