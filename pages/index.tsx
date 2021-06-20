@@ -2,7 +2,7 @@
 import { format } from 'date-fns-tz'
 import { NextPage } from 'next'
 import Head from 'next/head'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import useSWR from 'swr'
 import useDelayedRender from 'use-delayed-render'
 
@@ -105,7 +105,14 @@ type Propps = {
 // eslint-disable-next-line react/prop-types
 const Home: NextPage<Propps> = ({ data: initData }) => {
   const { data: refreshedData } = useSWR('/api/color', fetcher<APIData>(), { refreshInterval: 30e3 })
-  const data = refreshedData || initData
+
+  const data = useMemo(() => {
+    if (refreshedData) {
+      return refreshedData
+    } else {
+      return initData
+    }
+  }, [refreshedData, initData])
 
   const [modalVisible, setModalVisible] = useState(false)
 
