@@ -23,7 +23,7 @@
     "use-delayed-render": "0.0.7"
   },
   "devDependencies": {
-    "@types/color": "^3.0.1",
+    "@types/color": "3.0.2",
     "@types/color-name": "^1.1.1",
     "@types/date-fns": "^2.6.0",
     "@types/node": "^14.11.2",
